@@ -148,13 +148,15 @@ If you're using the excellent [Belchertown skin](https://github.com/poblabs/weew
 you can easily add graphs to `graphs.conf` like so:
 
 ```
-[[voltChart]]
-        title = Voltages
+[[voltChart7]]
+        title = Voltages -7
         type = spline
+        time_length = days_ago
+        time_ago = 7
         data_binding = davishealthapi_binding
         [[[supercapVolt]]]
         [[[solarVolt]]]
-        [[[txBattery]]] 
+        [[[txBattery]]]
 ```
 
 This yields a graph that looks like this:
