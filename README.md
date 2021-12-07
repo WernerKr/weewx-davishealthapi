@@ -105,9 +105,9 @@ Save the file and run it like so:
 It should return 3 URLs. Open that in a browser (don't delay, the timestamp is encoded in that URL and the Davis API will reject the call 
 if you wait too long to make the call) and you'll get back a string of text. Your station ID will be near the beginning. 
 Enter that number into weewx.conf and you should be good to go.
-v2 API URL: Stations
-v2 API URL: Current
-v2 API URL: Historic
+    v2 API URL: Stations
+    v2 API URL: Current
+    v2 API URL: Historic
 
 ## Usage
 
