@@ -121,12 +121,13 @@ skins/health
 
 The necessary file are there stored during the installation.
 Also the stanza 
-  [StdReport]
-    [[DavisHealth]] 
-        HTML_ROOT = /var/www/html/weewx/health
-        enable = true
-        skin = health
- 
+
+        [StdReport]
+          [[DavisHealth]]
+             HTML_ROOT = /var/www/html/weewx/health
+             enable = true
+             skin = health 
+
 in the weeewx.conf
 
         [[[dayvoltSensor]]]
