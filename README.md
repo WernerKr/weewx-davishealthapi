@@ -120,7 +120,7 @@ skins/health
 
 
 The necessary file are there stored during the installation.
-Also the stanza 
+Also the stanza in the weeewx.conf
 
         [StdReport]
           [[DavisHealth]]
@@ -128,7 +128,7 @@ Also the stanza
              enable = true
              skin = health 
 
-in the weeewx.conf
+In skin.conf:
 
         [[[dayvoltSensor]]]
             data_binding = davishealthapi_binding
