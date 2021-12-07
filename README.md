@@ -1,7 +1,7 @@
 # weewx-davishealthapi
 Collect and display station health information from the Davis WeatherLink API
 
-Modified from author 'uajqq
+Modified from author uajqq
 
 Weewx service that pulls device health (telemetry) information from Davis Instruments weather sensor(s) - up to 8 and from one DAVIS Airlink. 
 I made this extension for users like me who have a WeatherLink Live device, which unfortunately provides no sensor health data over the local API. 
