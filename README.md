@@ -61,7 +61,9 @@ By default, the installer installs `davishealthapi` as a service, allowing your 
 It runs during every archive interval and inserts data into its own SQL database.
 
 Example in the weewx.conf
+
 [davishealthapi]
+
     data_binding = davishealthapi_binding
     station_id = ?????
     packet_log = 0
@@ -126,8 +128,7 @@ in the weeewx.conf
 
 
 This should give you a result like this:
-
-![image](https://user-images.githubusercontent.com/46248396/87861986-6b502000-c919-11ea-851d-55e69c712cce.png)
+![image](https://user-images.githubusercontent.com/93549501/145085241-ac378d93-6fd3-427e-a948-9a5a27523066.png)
 
 Note how the solar cell drops to zero as the sun goes down, the supercapacitor slowly discharges throughout the night, 
 and the solar cell recharges it in the morning. If didn't get to zero so the sensor battery voltage remains untouched!
@@ -147,8 +148,7 @@ you can easily add graphs to `graphs.conf` like so:
 ```
 
 This yields a graph that looks like this:
-
-![Screen Shot 2020-07-18 at 5 21 57 PM](https://user-images.githubusercontent.com/46248396/87862923-4791d780-c923-11ea-86cf-5a0abecaeba9.png)
+![image](https://user-images.githubusercontent.com/93549501/145085504-0a7e4f9a-634f-48d5-800c-9972d5bef002.png)
 
 
 ***In all cases, note that you have to specify the database binding as `davishealthapi_binding` whenever you are referencing the DavisHealthAPI data!!*** Take a look at the example files to see how that's been done so you can adapt it for your own purposes.
