@@ -116,16 +116,25 @@ Once you enable the service/driver and get it running, you won't notice anything
 ### Own skin health
 The files for this new skin (additional to the Seasons skin) are found under 
 skins/health
+![image](https://user-images.githubusercontent.com/93549501/145085770-f78fd1e3-a665-4138-b0c8-d63e66600e86.png)
+
+
 The necessary file are there stored during the installation.
 Also the stanza 
-[StdReport]
- [[DavisHealth]] 
+  [StdReport]
+    [[DavisHealth]] 
         HTML_ROOT = /var/www/html/weewx/health
         enable = true
         skin = health
  
 in the weeewx.conf
 
+        [[[dayvoltSensor]]]
+            data_binding = davishealthapi_binding
+            title = Sensor voltages
+            [[[[supercapVolt]]]]
+            [[[[solarVolt]]]]
+            [[[[txBattery]]]]
 
 This should give you a result like this:
 ![image](https://user-images.githubusercontent.com/93549501/145085241-ac378d93-6fd3-427e-a948-9a5a27523066.png)
