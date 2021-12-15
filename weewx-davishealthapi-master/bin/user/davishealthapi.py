@@ -463,6 +463,9 @@ def get_json(url, uerror):
     except requests.RequestException as error:
         logerr("RequestException: %s" % error)
         uerror = True
+    except:
+        logerr("Error at get_json")
+        uerror = True
     if not uerror:
      return response.json()
     else:
@@ -765,6 +768,9 @@ def decode_historical_json(data, self):
             "Error is: %s" % error
         )
         logerr("The API data returned was: %s" % data)
+    except:
+        logerr("No historical data.")
+  
     return h_packet
 
 
@@ -864,6 +870,9 @@ def decode_current_json(data, self):
             "Error is: %s" % error
         )
         logerr("The API data returned was: %s" % data)
+    except:
+        logerr("No current data.")
+
     return c_packet
 
 
