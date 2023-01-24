@@ -29,6 +29,7 @@
                 "signalQuality7", "rssi7", "afc7", "txID7", 
 ]
 #set $battery_statuses = [ "txBatteryFlag", "txBatteryFlag1", "txBatteryFlag2", "txBatteryFlag3", "txBatteryFlag4", "txBatteryFlag5", "txBatteryFlag6", "txBatteryFlag7" ]
+#set $max_battery_statuses = 5
 
 #set $transm = [ "packetStreak", "errorPackets", "resynchs",
                 "packetStreak1", "errorPackets1", "resynchs1",
@@ -68,6 +69,7 @@
  #end for
 
     <tr><th>Power Status</th><th></th></tr>
+#if $current($max_delta=3600,$data_binding='davishealthapi_binding').supercapVolt.has_data
     <tr>
       <td class="label">$obs.label.supercapVolt</td>
       <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').supercapVolt.format("%.3f")</td>
@@ -76,10 +78,19 @@
       <td class="label">$obs.label.solarVolt</td>
       <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').solarVolt.format("%.3f")</td>
     </tr>
+#end if
+#if $current($max_delta=3600,$data_binding='davishealthapi_binding').uvVolt.has_data
+    <tr>
+      <td class="label">$obs.label.uvVolt</td>
+      <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').uvVolt.format("%.3f")</td>
+    </tr>
+#end if
+#if $current($max_delta=3600,$data_binding='davishealthapi_binding').txBattery.has_data
     <tr>
       <td class="label">$obs.label.txBattery</td>
       <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').txBattery.format("%.3f")</td>
     </tr>
+#end if
 
 #if $current($max_delta=3600,$data_binding='davishealthapi_binding').supercapVolt1.has_data
     <tr>
@@ -93,20 +104,40 @@
       <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').solarVolt1.format("%.3f")</td>
     </tr>
 #end if
+#if $current($max_delta=3600,$data_binding='davishealthapi_binding').uvVolt1.has_data
+    <tr>
+      <td class="label">$obs.label.uvVolt1</td>
+      <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').uvVolt1.format("%.3f")</td>
+    </tr>
+#end if
 #if $current($max_delta=3600,$data_binding='davishealthapi_binding').txBattery1.has_data
     <tr>
       <td class="label">$obs.label.txBattery1</td>
       <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').txBattery1.format("%.3f")</td>
     </tr>
 #end if
-
+#if $current($max_delta=3600,$data_binding='davishealthapi_binding').txBattery2.has_data
+    <tr>
+      <td class="label">$obs.label.txBattery2</td>
+      <td class="data">$current($max_delta=3600,$data_binding='davishealthapi_binding').txBattery2.format("%.3f")</td>
+    </tr>
+#end if
+#set $count = 0
  #for $x in $battery_statuses
+  #set $count = $count + 1  
   #if $getattr($current($max_delta=3600,$data_binding='davishealthapi_binding'), $x).has_data
     <tr>
       <td class="label">$obs.label[$x]</td>
       #set $xv = $getattr($current($max_delta=3600,$data_binding='davishealthapi_binding'), $x) 
       <td class="data">$get_battery_status($xv.raw)</td>
     </tr>
+  #else
+   #if $count <= $max_battery_statuses
+    <tr>
+      <td class="label"><font color='red'>$obs.label[$x]</font></td>
+      <td class="data"><font color='red'>N/A</font></td>
+    </tr>
+   #end if
   #end if
  #end for
 

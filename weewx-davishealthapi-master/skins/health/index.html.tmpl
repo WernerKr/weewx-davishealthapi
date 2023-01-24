@@ -3,6 +3,16 @@
 #errorCatcher Echo
 #encoding UTF-8
 
+#set $allways_lang = False
+#set $use_lang = False
+#try
+ #if $SKIN_VERSION != '' or $allways_lang == True
+  #set $use_lang = True
+ #end if
+#except
+ #pass
+#end try
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,24 +31,47 @@
 
       <div id="widget_group">
         #include "sensors.inc"
-        #include "sensorsair.inc"
+        #if $day($data_binding='davishealthapi_binding').rssiA.has_data
+         #include "sensorsair.inc"
+        #end if
       </div>
 
       <div id="plot_group">
         <div id="history_widget" class="widget">
+         #if $use_lang
+          <div id="plot_title" class="widget_title">$gettext("Telemetry"):&nbsp;&nbsp;
+         #else
           <div id="plot_title" class="widget_title">Telemetry:&nbsp;&nbsp;
+         #end if
+         #if $use_lang
+            <a class="button_selected" id="button_history_day"
+               onclick="choose_history('day')">$gettext("Day")</a>
+            #if $day($data_binding='davishealthapi_binding').supercapVolt.has_data
+            <a class="button" id="button_history_xday"
+               onclick="choose_history('xday')">$gettext("XDay")</a>
+            #end if
+            <a class="button" id="button_history_week"
+               onclick="choose_history('week')">$gettext("Week")</a>
+            <a class="button" id="button_history_month"
+               onclick="choose_history('month')">$gettext("Month")</a>
+            <a class="button" id="button_history_year"
+               onclick="choose_history('year')">$gettext("Year")</a>
+          #else
             <a class="button_selected" id="button_history_day"
                onclick="choose_history('day')">Day</a>
-
+            #if $day($data_binding='davishealthapi_binding').supercapVolt.has_data
             <a class="button" id="button_history_xday"
                onclick="choose_history('xday')">XDay</a>
+            #end if
             <a class="button" id="button_history_week"
                onclick="choose_history('week')">Week</a>
             <a class="button" id="button_history_month"
                onclick="choose_history('month')">Month</a>
             <a class="button" id="button_history_year"
                onclick="choose_history('year')">Year</a>
+          #end if 
           </div>
+
           <div id="history_day" class="plot_container">
             #if $day($data_binding='davishealthapi_binding').signalQuality.has_data
             <img src="dayrx.png"        alt="$obs.label.signalQuality"/>
@@ -66,15 +99,16 @@
             <img src="daysignalA.png"        alt="$obs.label.rssiA"/>
             #end if
           </div>
+          #if $day($data_binding='davishealthapi_binding').supercapVolt.has_data
           <div id="history_xday" class="plot_container" style="display:none">
-            #if $day($data_binding='davishealthapi_binding').supercapVolt.has_data
              <img src="dayvoltSensor.png"        alt="$obs.label.supercapVolt"/>
              <img src="xdayvoltSensor_0.png"        alt="$obs.label.supercapVolt"/>
              <img src="xdayvoltSensor_1.png"        alt="$obs.label.supercapVolt"/>
              <img src="xdayvoltSensor_2.png"        alt="$obs.label.supercapVolt"/>
              <img src="xdayvoltSensor_3.png"        alt="$obs.label.supercapVolt"/>
-            #end if
+             <img src="xdayvoltSensor_4.png"        alt="$obs.label.supercapVolt"/>
           </div>
+          #end if
           <div id="history_week" class="plot_container" style="display:none">
             #if $week($data_binding='davishealthapi_binding').signalQuality.has_data
             <img src="weekrx.png"        alt="$obs.label.signalQuality"/>
